@@ -58,13 +58,18 @@ Follow this workflow in order.
      )"
      ```
 
-5. Push branch to remote.
+5. Confirm before pushing branch.
+   - Pause and ask for explicit confirmation right before running any push command.
+   - Do not run `git push` or `git push -u` until the user confirms.
+   - If the user asks to adjust remote or branch, use the edited values exactly.
+
+6. Push branch to remote.
    - First push with upstream:
      - `git push -u <remote> <branch-name>`
    - Later pushes:
      - `git push`
 
-6. Handle common failures.
+7. Handle common failures.
    - Non-fast-forward push rejected:
      - `git fetch <remote>`
      - Rebase or merge based on team preference, then push again.
@@ -73,16 +78,18 @@ Follow this workflow in order.
    - Merge/rebase conflicts:
      - Resolve conflicts, stage files, continue rebase/merge, then push.
 
-7. Final verification.
+8. Final verification.
    - Run `git status` and confirm clean working tree.
    - Confirm branch tracks remote and push succeeded.
 
 ## Confirmation Rules
 
-- Always pause for user confirmation at two points:
+- Run commands automatically without extra permission prompts, except at required checkpoints.
+- Always pause for user confirmation at three points:
   - Before branch creation/switch (branch name is editable)
   - Before commit (commit message is editable)
-- If the user edits branch name or commit message, use the edited value exactly.
+  - Right before pushing branch to remote (push target is editable)
+- If the user edits branch name, commit message, remote, or push target, use the edited value exactly.
 - If the user rejects a proposal, regenerate a better proposal and ask again.
 - Never proceed to the next git action until confirmation is received.
 
